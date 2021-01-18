@@ -1,10 +1,11 @@
 import React from 'react'
 import { Grid, Card, CardMedia, Typography, CardContent, Box, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
+ 
 
 export default function CardPokemon(props) {
   const classes = useStyles();
+ 
 
     return (
      <Grid className={classes.pokedexContainer} item xs={6} sm={3} key={props.id}>
@@ -36,12 +37,13 @@ export default function CardPokemon(props) {
                 
                 <Button variant="contained"
                     color="secondary"
-                    onClick={props.btnFunction}>
+                    onClick={() => { props.btnFunction();}}>
                     {props.btnName}
-                </Button>
-
+            </Button>
+            
             </CardContent>
         </Card>
+
      </Grid>
     )
 }

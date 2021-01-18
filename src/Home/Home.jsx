@@ -13,8 +13,11 @@ function Home(props) {
         <h3 class="span-audio">Música intro da primeira temporada ⇨ letra da música ⇦</h3>
       </a>
       
-      <audio src="pokemon.mp3" className="audio" controls="controls"
-        preload="auto" autoplay></audio>
+      <audio className="audio" controls="controls"
+        preload="auto" autoplay="" >
+          <source src="pokemon.ogg" type="audio/ogg" />
+          <source src="pokemon.mp3" type="audio/mpeg" />
+        </audio>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 sm:px-8 sm:py-12 sm:gap-x-8 md:py-16">
         <div class="relative z-10 col-start-1 row-start-1 px-4 pt-40 pb-3 bg-gradient-to-t from-black sm:bg-none">

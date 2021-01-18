@@ -2,19 +2,22 @@ import React from 'react';
 import { Toolbar, AppBar, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from 'react-router-dom';
-import { CardsContainer } from '../../Components/CardsContainer/styles';
+import { StyleContainer } from '../../style';
 import { GlobalContext } from '../../providers/GlobalContext';
-import { goToDetailPage } from '../../Routes/CoordinatorRouter';
+import { detailPage } from '../../Routes/CoordinatorRouter';
 import CardPokemon from '../../Components/CardPokemon';
 import Loading from "../../Components/Loading";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 
 
 export default function HomePage() {
     const history = useHistory()
     const classes = useStyles();
-
+    toast.configure();
     const data = React.useContext(GlobalContext)
+  
     data.pokeList.sort(function(a,b){return a.id - b.id})
 
     
@@ -26,20 +29,30 @@ export default function HomePage() {
             newPokeList.splice(position,1)
         }  
         data.setPokeList(newPokeList)
-        data.setPopUp(!data.popUp)
     }
     
+  const notify = () => {
+    toast.success("Pokémon adicionado com sucesso!", {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER
+        });
+        }
+    
+
     const renderPokeList = data.pokeList.map( (item) => {
         return (
+        <React.Fragment>
             <CardPokemon
                 key={item.id}
                 name={item.name.toUpperCase()}
                 img={item.sprites.front_default}
-                goToDetail={() => goToDetailPage(history, item.id)}
-                btnFunction={() => addToPokedex(item)}
+                goToDetail={() => detailPage(history, item.id)}
+                btnFunction={() => { notify(); addToPokedex(item)}}
                 btnName="Adicionar">
 
-           </CardPokemon>
+            </CardPokemon>
+
+        </React.Fragment>
         )
     })
 
@@ -68,9 +81,9 @@ export default function HomePage() {
                 </Toolbar>
             </AppBar>
 
-            <CardsContainer>
+            <StyleContainer>
                 {data.pokeList[0] ? renderPokeList : <Loading/>}
-            </CardsContainer>
+            </StyleContainer>
         </div>
     )
 }

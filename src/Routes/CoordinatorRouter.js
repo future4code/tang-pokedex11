@@ -8,10 +8,10 @@ export const HomePage = (history) => {
 }
 
 
-export const goToPokedexPage = (history) => {
+export const pokedexPage = (history) => {
     history.push('/pokedex')
 }
 
-export const goToDetailPage = (history, pokeId) => {
+export const detailPage = (history, pokeId) => {
     history.push(`/detail/${pokeId}`)
 }

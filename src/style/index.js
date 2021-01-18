@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardsContainer = styled.div `
+export const StyleContainer = styled.div `
     display: flex;
     min-height: 85vh;
     justify-content: space-evenly;
